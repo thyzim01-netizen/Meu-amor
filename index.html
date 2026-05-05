@@ -5,9 +5,11 @@
 <title>Minha Princesa ❤️</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
 body {
-    font-family: Arial;
-    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
     text-align: center;
     padding: 20px;
     color: #fff;
@@ -15,36 +17,48 @@ body {
 }
 
 h1 {
-    font-size: 32px;
+    font-size: 34px;
+    margin-bottom: 5px;
+}
+
+h2 {
+    font-weight: 300;
+    margin-bottom: 20px;
 }
 
 .card {
-    background: white;
-    color: #333;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    color: white;
     margin: 20px auto;
-    padding: 15px;
-    border-radius: 15px;
-    max-width: 400px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 420px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.03);
 }
 
 .destaque {
-    border: 3px solid #ff4d6d;
-    transform: scale(1.05);
+    border: 2px solid #fff;
+    background: rgba(255, 255, 255, 0.25);
 }
 
 iframe {
     border-radius: 12px;
+    margin-top: 10px;
 }
 
-/* INTRO */
 #intro {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: #000;
+    background: radial-gradient(circle, #000, #111);
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -54,19 +68,25 @@ iframe {
 }
 
 #intro button {
-    padding: 10px 20px;
+    padding: 12px 25px;
     border: none;
-    border-radius: 10px;
-    background: #ff4d6d;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #ff4d6d, #ff758c);
     color: white;
     font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-/* CORAÇÕES */
+#intro button:hover {
+    transform: scale(1.1);
+}
+
 .heart {
     position: fixed;
     top: -10px;
     animation: fall linear infinite;
+    font-size: 20px;
 }
 
 @keyframes fall {
@@ -75,10 +95,10 @@ iframe {
     }
 }
 
-/* TEXTO */
 #typing {
-    font-size: 18px;
+    font-size: 20px;
     margin: 20px;
+    max-width: 300px;
 }
 </style>
 </head>
