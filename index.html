@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Minha Princesa ❤️</title>
+<title>Ma passion unique ❤️</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
@@ -16,20 +16,13 @@ body {
     overflow-x: hidden;
 }
 
-h1 {
-    font-size: 34px;
-    margin-bottom: 5px;
-}
+h1 { font-size: 34px; }
+h2 { font-weight: 300; }
 
-h2 {
-    font-weight: 300;
-    margin-bottom: 20px;
-}
-
+/* CARDS */
 .card {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255,255,255,0.15);
     backdrop-filter: blur(10px);
-    color: white;
     margin: 20px auto;
     padding: 20px;
     border-radius: 20px;
@@ -38,32 +31,23 @@ h2 {
     transition: 0.3s;
 }
 
-.card:hover {
-    transform: scale(1.03);
-}
+.card:hover { transform: scale(1.03); }
 
 .destaque {
     border: 2px solid #fff;
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255,255,255,0.25);
 }
 
-iframe {
-    border-radius: 12px;
-    margin-top: 10px;
-}
-
+/* INTRO */
 #intro {
     position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, #000, #111);
-    color: #fff;
+    background: #000;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     z-index: 999;
 }
 
@@ -71,76 +55,40 @@ iframe {
     padding: 12px 25px;
     border: none;
     border-radius: 20px;
-    background: linear-gradient(45deg, #ff4d6d, #ff758c);
+    background: #ff4d6d;
     color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
 }
 
-#intro button:hover {
-    transform: scale(1.1);
-}
-
+/* CORAÇÕES */
 .heart {
     position: fixed;
     top: -10px;
     animation: fall linear infinite;
-    font-size: 20px;
 }
 
 @keyframes fall {
-    to {
-        transform: translateY(100vh);
-    }
-}
-
-#typing {
-    font-size: 20px;
-    margin: 20px;
-    max-width: 300px;
+    to { transform: translateY(100vh); }
 }
 </style>
 </head>
 
 <body>
 
-<!-- TELA INICIAL -->
 <div id="intro">
-    <h1 id="typing"></h1>
-    <button onclick="entrar()">Entrar ❤️</button>
+    <h1>Tenho algo especial pra você ❤️</h1>
+    <button onclick="entrar()">Entrar</button>
 </div>
 
-<h1>❤️ Minha Princesa ❤️</h1>
+<h1>❤️ Ma passion unique ❤️</h1>
 <h2 id="contador"></h2>
 
 <div id="musicas"></div>
 
 <script>
 
-// TEXTO DIGITANDO
-let frase = "Tenho algo muito especial pra te mostrar...";
-let i = 0;
-
-function digitar() {
-    if (i < frase.length) {
-        document.getElementById("typing").innerHTML += frase.charAt(i);
-        i++;
-        setTimeout(digitar, 50);
-    }
-}
-digitar();
-
 // ENTRAR
 function entrar() {
-    let intro = document.getElementById("intro");
-    intro.style.opacity = "0";
-    intro.style.transition = "1s";
-
-    setTimeout(() => {
-        intro.style.display = "none";
-    }, 1000);
-
+    document.getElementById("intro").style.display = "none";
     coracoes();
 }
 
@@ -150,86 +98,77 @@ function coracoes() {
         let heart = document.createElement("div");
         heart.classList.add("heart");
         heart.innerHTML = "❤️";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        heart.style.left = Math.random()*100+"vw";
+        heart.style.animationDuration = (Math.random()*3+2)+"s";
         document.body.appendChild(heart);
-
-        setTimeout(() => heart.remove(), 5000);
-    }, 300);
+        setTimeout(()=>heart.remove(),5000);
+    },300);
 }
 
-// CONTADOR
+// CONTADOR COMPLETO
 function atualizarContador() {
     let inicio = new Date(2026, 3, 30);
-    let hoje = new Date();
-    let dias = Math.floor((hoje - inicio) / (1000 * 60 * 60 * 24));
+    let agora = new Date();
+
+    let diff = agora - inicio;
+
+    let dias = Math.floor(diff / (1000*60*60*24));
+    let horas = Math.floor((diff / (1000*60*60)) % 24);
+    let minutos = Math.floor((diff / (1000*60)) % 60);
+    let segundos = Math.floor((diff / 1000) % 60);
 
     document.getElementById("contador").innerText =
-    "Estamos juntos há " + dias + " dias ❤️";
+    `${dias} dias, ${horas}h ${minutos}m ${segundos}s ❤️`;
 }
 
-// atualiza na hora
+setInterval(atualizarContador, 1000);
 atualizarContador();
 
-// atualiza a cada 1 minuto
-setInterval(atualizarContador, 60000);
-
-document.getElementById("contador").innerText =
-"Estamos juntos há " + dias + " dias ❤️";
-
-// SPOTIFY
+// SPOTIFY FIX
 function embed(link) {
-    return link.replace("open.spotify.com/track/", "open.spotify.com/embed/track/");
+    let limpa = link.split("?")[0];
+    return limpa.replace("open.spotify.com/track/", "open.spotify.com/embed/track/");
 }
 
 // MÚSICAS
 let lista = [
-
 {
 texto: "Desde que você chegou na minha vida, seu amor me curou e vem me fazendo feliz, uma paixão que caiu do céu.",
 link: "https://open.spotify.com/track/691336LeF13WhNb5kmCzuC",
 destaque: false
 },
-
 {
 texto: "E nessa vida venho percebendo que essa paixão vem amadurecendo e sendo bela, como as folhas de outono.",
 link: "https://open.spotify.com/track/2aDBeapvqr3Cnjooy3whwd",
 destaque: false
 },
-
 {
 texto: "Mas sua beleza me inspira e me encanta, aliás, você é minha princesa, minha linda.",
 link: "https://open.spotify.com/track/7KQ77xcxGBs94Ze45jWiGs",
 destaque: false
 },
-
 {
 texto: "E nesse vai e vem da vida eu percebi o que eu sinto por ti, afinal...",
 link: "https://open.spotify.com/track/04h9o3gtRD7fvGafF7ukJj",
 destaque: false
 },
-
 {
 texto: "E percebo que essa paixão vem se tornando muito para mim, afinal, é...",
 link: "https://open.spotify.com/track/2k818cpVCwtF1VFJPM7k7H",
 destaque: false
 },
-
 {
 texto: "Eu sei, meu amor, eu sei que você é o amor da minha vida, afinal, é você meu bem-querer, meu prazer sagrado, e nessa música expresso meu amor apaixonado, nossa música...",
 link: "https://open.spotify.com/track/7fkIYXPqKXQ7Swnqm0GYS6",
 destaque: true
 },
-
 {
 texto: "E, por fim, eu venho através do meu cantor favorito lhe falar, mas com palavras não sei expressar, mas lhe garanto que eu te amo.",
 link: "https://open.spotify.com/track/0ja80k9GL9aR5IZ79tQHVX",
 destaque: true
 }
-
 ];
 
-// MOSTRAR
 let div = document.getElementById("musicas");
 
 lista.forEach(item => {
@@ -237,14 +176,11 @@ lista.forEach(item => {
     <div class="card ${item.destaque ? 'destaque' : ''}">
         <p>${item.texto}</p>
         <iframe src="${embed(item.link)}"
-        width="100%" height="80"
-        frameborder="0"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+        width="100%" height="80" frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media">
         </iframe>
-    </div>
-    `;
+    </div>`;
 });
-
 </script>
 
 </body>
