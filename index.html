@@ -159,9 +159,20 @@ function coracoes() {
 }
 
 // CONTADOR
-let inicio = new Date("2026-04-30");
-let hoje = new Date();
-let dias = Math.floor((hoje - inicio) / (1000 * 60 * 60 * 24));
+function atualizarContador() {
+    let inicio = new Date(2026, 3, 30);
+    let hoje = new Date();
+    let dias = Math.floor((hoje - inicio) / (1000 * 60 * 60 * 24));
+
+    document.getElementById("contador").innerText =
+    "Estamos juntos há " + dias + " dias ❤️";
+}
+
+// atualiza na hora
+atualizarContador();
+
+// atualiza a cada 1 minuto
+setInterval(atualizarContador, 60000);
 
 document.getElementById("contador").innerText =
 "Estamos juntos há " + dias + " dias ❤️";
