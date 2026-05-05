@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Minha Princesa ❤️</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+.card {
+    background: white;
+    color: #333;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 15px;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.destaque {
+    border: 3px solid #ff4d6d;
+    transform: scale(1.05);
+}
+
+iframe {
+    border-radius: 12px;
+}
+
+/* INTRO */
+#intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+#intro button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #ff4d6d;
+    color: white;
+    font-size: 16px;
+}
+
+/* CORAÇÕES */
+.heart {
+    position: fixed;
+    top: -10px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+/* TEXTO */
+#typing {
+    font-size: 18px;
+    margin: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- TELA INICIAL -->
+<div id="intro">
+    <h1 id="typing"></h1>
+    <button onclick="entrar()">Entrar ❤️</button>
+</div>
+
+<h1>❤️ Minha Princesa ❤️</h1>
+<h2 id="contador"></h2>
+
+<div id="musicas"></div>
+
+<script>
+
+// TEXTO DIGITANDO
+let frase = "Tenho algo muito especial pra te mostrar...";
+let i = 0;
+
+function digitar() {
+    if (i < frase.length) {
+        document.getElementById("typing").innerHTML += frase.charAt(i);
+        i++;
+        setTimeout(digitar, 50);
+    }
+}
+digitar();
+
+// ENTRAR
+function entrar() {
+    let intro = document.getElementById("intro");
+    intro.style.opacity = "0";
+    intro.style.transition = "1s";
+
+    setTimeout(() => {
+        intro.style.display = "none";
+    }, 1000);
+
+    coracoes();
+}
+
+// CORAÇÕES
+function coracoes() {
+    setInterval(() => {
+        let heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 5000);
+    }, 300);
+}
+
+// CONTADOR
+let inicio = new Date("2026-04-30");
+let hoje = new Date();
+let dias = Math.floor((hoje - inicio) / (1000 * 60 * 60 * 24));
+
+document.getElementById("contador").innerText =
+"Estamos juntos há " + dias + " dias ❤️";
+
+// SPOTIFY
+function embed(link) {
+    return link.replace("open.spotify.com/track/", "open.spotify.com/embed/track/");
+}
+
+// MÚSICAS
+let lista = [
+
+{
+texto: "Desde que você chegou na minha vida, seu amor me curou e vem me fazendo feliz, uma paixão que caiu do céu.",
+link: "https://open.spotify.com/track/691336LeF13WhNb5kmCzuC",
+destaque: false
+},
+
+{
+texto: "E nessa vida venho percebendo que essa paixão vem amadurecendo e sendo bela, como as folhas de outono.",
+link: "https://open.spotify.com/track/2aDBeapvqr3Cnjooy3whwd",
+destaque: false
+},
+
+{
+texto: "Mas sua beleza me inspira e me encanta, aliás, você é minha princesa, minha linda.",
+link: "https://open.spotify.com/track/7KQ77xcxGBs94Ze45jWiGs",
+destaque: false
+},
+
+{
+texto: "E nesse vai e vem da vida eu percebi o que eu sinto por ti, afinal...",
+link: "https://open.spotify.com/track/04h9o3gtRD7fvGafF7ukJj",
+destaque: false
+},
+
+{
+texto: "E percebo que essa paixão vem se tornando muito para mim, afinal, é...",
+link: "https://open.spotify.com/track/2k818cpVCwtF1VFJPM7k7H",
+destaque: false
+},
+
+{
+texto: "Eu sei, meu amor, eu sei que você é o amor da minha vida, afinal, é você meu bem-querer, meu prazer sagrado, e nessa música expresso meu amor apaixonado, nossa música...",
+link: "https://open.spotify.com/track/7fkIYXPqKXQ7Swnqm0GYS6",
+destaque: true
+},
+
+{
+texto: "E, por fim, eu venho através do meu cantor favorito lhe falar, mas com palavras não sei expressar, mas lhe garanto que eu te amo.",
+link: "https://open.spotify.com/track/0ja80k9GL9aR5IZ79tQHVX",
+destaque: true
+}
+
+];
+
+// MOSTRAR
+let div = document.getElementById("musicas");
+
+lista.forEach(item => {
+    div.innerHTML += `
+    <div class="card ${item.destaque ? 'destaque' : ''}">
+        <p>${item.texto}</p>
+        <iframe src="${embed(item.link)}"
+        width="100%" height="80"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+        </iframe>
+    </div>
+    `;
+});
+
+</script>
+
+</body>
+</html>
